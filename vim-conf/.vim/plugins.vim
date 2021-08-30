@@ -42,8 +42,50 @@ Plug 'brooth/far.vim'
 
 
 " 符号索引
-Plug 'universal-ctags/ctags'
 set tags=./.tags;,.tags
+
+
+" cscope
+set cscopequickfix=s-,c-,d-,i-,t-,e-
+" if has("cscope")
+"     set csprg=/usr/bin/cscope
+"     set csto=0
+"     set cst
+"     set nocsverb
+
+"     cs add cscope.out
+
+"     " " add any database in current directory
+"     " if filereadable("cscope.out") 
+"     "     cs add cscope.out
+
+"     " " else add database point to by environment
+"     " elseif $CSCOPE_DB != "" 
+"     "     cs add $CSCOPE_DB
+"     " endif
+"     " set csverb
+" endif
+" let cs_auto_jump = 0
+
+" s: Find this C symbol
+nnoremap  <leader>fs :call CscopeFind('s', expand('<cword>'))<CR>
+" g: Find this definition
+nnoremap  <leader>fg :call CscopeFind('g', expand('<cword>'))<CR>
+" d: Find functions called by this function
+nnoremap  <leader>fd :call CscopeFind('d', expand('<cword>'))<CR>
+" c: Find functions calling this function
+nnoremap  <leader>fc :call CscopeFind('c', expand('<cword>'))<CR>
+" t: Find this text string
+nnoremap  <leader>ft :call CscopeFind('t', expand('<cword>'))<CR>
+" e: Find this egrep pattern
+nnoremap  <leader>fe :call CscopeFind('e', expand('<cword>'))<CR>
+" f: Find this file
+nnoremap  <leader>ff :call CscopeFind('f', expand('<cword>'))<CR>
+" i: Find files #including this file
+nnoremap  <leader>fi :call CscopeFind('i', expand('<cword>'))<CR>
+
+" 语法高亮
+Plug 'octol/vim-cpp-enhanced-highlight'
 
 
 " 自动生成符号索引
