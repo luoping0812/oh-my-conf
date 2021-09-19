@@ -1,10 +1,12 @@
 #!/bin/bash 
 
+EXEC_DIR=$(cd `dirname $0`; pwd)
+echo ${EXEC_DIR}
+PKG_TOOL="apt-get"
+
 echo "install begin"
 
-tool_set=(python3 python3-pip make gcc zsh tmux cscope ctags zplug fzf thefuck autojump)
-
-PKG_TOOL="apt-get"
+tool_set=(python3 python3-pip make gcc zsh tmux cscope ctags zplug fzf thefuck autojump vim-gtk3)
 
 sudo ${PKG_TOOL} update
 
@@ -71,7 +73,6 @@ echo "install end"
 echo ""
 echo "init config begin"
 
-EXEC_DIR=$(cd `dirname $0`; pwd)
 #vim
 if [ ! -d ~/.vim ]; then
     cp ${EXEC_DIR}/vim-conf/.vimrc ~ 
@@ -90,5 +91,4 @@ if [ ! -f ~/.zshrc ]; then
 fi
 
 echo "init config end"
-
 
