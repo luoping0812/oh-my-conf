@@ -6,7 +6,7 @@ PKG_TOOL="apt-get"
 
 echo "install begin"
 
-tool_set=(python3 python3-pip make gcc zsh tmux cscope ctags zplug fzf thefuck autojump vim-gtk3)
+tool_set=(python3 python3-pip make gcc zsh tmux cscope ctags zplug fzf thefuck autojump vim-gtk3 manpages-zh)
 
 sudo ${PKG_TOOL} update
 
@@ -81,7 +81,9 @@ if [ ! -d ~/.vim ]; then
 fi
 
 if [ ! -f ~/.tmux.conf ]; then
-    cp ${EXEC_DIR}/tmux-conf/. ~ 
+    cp ${EXEC_DIR}/tmux-conf/.tmux.conf ~ 
+    cp ${EXEC_DIR}/tmux-conf/.tmux.conf.local ~ 
+
     source ~/.tmux.conf
 fi
 
@@ -92,3 +94,6 @@ fi
 
 echo "init config end"
 
+
+echo "alias cman='man -M /usr/share/man/zh_CN' " >> .bash_profile
+source ~/.bash_profile
