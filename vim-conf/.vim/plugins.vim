@@ -1,17 +1,14 @@
 " 奶牛
 Plug 'mhinz/vim-startify'
 
-
 " 状态栏
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-
 
 " 目录树
 Plug 'scrooloose/nerdtree'
 nnoremap <leader>v :NERDTreeFind<cr> 
 nnoremap <leader>g :NERDTreeToggle<cr>
-
 
 " 文件搜索
 Plug 'ctrlpvim/ctrlp.vim'
@@ -24,7 +21,6 @@ let g:ctrlp_custom_ignore = {
   \ 'link': 'some_bad_symbolic_links',
   \ }
 
-
 " 文件内定位
 Plug 'easymotion/vim-easymotion'
 nmap ss <Plug>(easymotion-s2)
@@ -33,85 +29,49 @@ nmap ss <Plug>(easymotion-s2)
 Plug 'lfv89/vim-interestingwords'
 
 " 模糊搜索
-" Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-" Plug 'junegunn/fzf.vim'
-
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 
 " 批量搜索替换 
 Plug 'brooth/far.vim'
 
+"" 符号索引
+"let $GTAGSLABEL = 'native-pygments'
+"let $GTAGSCONF = '/usr/local/share/gtags/gtags.conf'
 
-" 符号索引
-set tags=./.tags;,.tags
+""set tags=./.tags;,.tags
 
-
-" cscope
-set cscopequickfix=s-,c-,d-,i-,t-,e-
-" if has("cscope")
-"     set csprg=/usr/bin/cscope
-"     set csto=0
-"     set cst
-"     set nocsverb
-
-"     cs add cscope.out
-
-"     " " add any database in current directory
-"     " if filereadable("cscope.out") 
-"     "     cs add cscope.out
-
-"     " " else add database point to by environment
-"     " elseif $CSCOPE_DB != "" 
-"     "     cs add $CSCOPE_DB
-"     " endif
-"     " set csverb
-" endif
-" let cs_auto_jump = 0
-
-" s: Find this C symbol
-nnoremap  <leader>fs :call CscopeFind('s', expand('<cword>'))<CR>
-" g: Find this definition
-nnoremap  <leader>fg :call CscopeFind('g', expand('<cword>'))<CR>
-" d: Find functions called by this function
-nnoremap  <leader>fd :call CscopeFind('d', expand('<cword>'))<CR>
-" c: Find functions calling this function
-nnoremap  <leader>fc :call CscopeFind('c', expand('<cword>'))<CR>
-" t: Find this text string
-nnoremap  <leader>ft :call CscopeFind('t', expand('<cword>'))<CR>
-" e: Find this egrep pattern
-nnoremap  <leader>fe :call CscopeFind('e', expand('<cword>'))<CR>
-" f: Find this file
-nnoremap  <leader>ff :call CscopeFind('f', expand('<cword>'))<CR>
-" i: Find files #including this file
-nnoremap  <leader>fi :call CscopeFind('i', expand('<cword>'))<CR>
-
-" 语法高亮
-Plug 'octol/vim-cpp-enhanced-highlight'
-
-
-" 自动生成符号索引
-Plug 'ludovicchabant/vim-gutentags'
-" gutentags 搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归
-let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
-" 所生成的数据文件的名称
-let g:gutentags_ctags_tagfile = '.tags'
-" 将自动生成的 tags 文件全部放入 ~/.cache/tags 目录中，避免污染工程目录
-let s:vim_tags = expand('~/.cache/tags')
-let g:gutentags_cache_dir = s:vim_tags
-" 配置 ctags 的参数
-let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
-let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
-let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
-" 检测 ~/.cache/tags 不存在就新建
-if !isdirectory(s:vim_tags)
-   silent! call mkdir(s:vim_tags, 'p')
-endif
-
-" 代码大纲 
-Plug 'preservim/tagbar'
-nnoremap <leader>t :TagbarToggle<cr>
-
-" 查找引用
-" Plug 'SpaceVim/cscope.vim'
+"" 自动生成符号索引
+"Plug 'ludovicchabant/vim-gutentags'
+"" gutentags 搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归
+"let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
+"" 所生成的数据文件的名称
+"let g:gutentags_ctags_tagfile = '.tags'
+"" 同时开启 ctags 和 gtags 支持：
+"let g:gutentags_modules = []
+"if executable('ctags')
+"    let g:gutentags_modules += ['ctags']
+"endif
+"if executable('gtags-cscope') && executable('gtags')
+"    let g:gutentags_modules += ['gtags_cscope']
+"endif
+"" 将自动生成的 tags 文件全部放入 ~/.cache/tags 目录中，避免污染工程目录
+"let s:vim_tags = expand('~/.cache/tags')
+"let g:gutentags_cache_dir = s:vim_tags
+"" 配置 ctags 的参数
+"let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
+"let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
+"let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+"" 禁用 gutentags 自动加载 gtags 数据库的行为
+"let g:gutentags_auto_add_gtags_cscope = 0
+""let g:gutentags_plus_switch = 1
+"" 检测 ~/.cache/tags 不存在就新建
+"if !isdirectory(s:vim_tags)
+"   silent! call mkdir(s:vim_tags, 'p')
+"endif
+"let g:gutentags_define_advanced_commands = 1
+"Plug 'skywind3000/gutentags_plus'
+"let g:gutentags_plus_nomap = 0
 
 " 编译运行
 Plug 'skywind3000/asyncrun.vim'
@@ -149,34 +109,34 @@ let g:ycm_semantic_triggers =  {
            \ 'cs,lua,javascript': ['re!\w{2}'],
            \ }
 
-
-" 静态检查
-Plug 'dense-analysis/ale'
-let g:ale_linters_explicit = 1
-let g:ale_completion_delay = 500
-let g:ale_echo_delay = 20
-let g:ale_lint_delay = 500
-let g:ale_echo_msg_format = '[%linter%] %code: %%s'
-let g:ale_lint_on_text_changed = 'normal'
-let g:ale_lint_on_insert_leave = 1
-let g:airline#extensions#ale#enabled = 1
-
-let g:ale_c_gcc_options = '-Wall -O2 -std=c99'
-let g:ale_cpp_gcc_options = '-Wall -O2 -std=c++14'
-let g:ale_c_cppcheck_options = ''
-let g:ale_cpp_cppcheck_options = ''
-
-let g:ale_sign_error = "\ue009\ue009"
-hi! clear SpellBad
-hi! clear SpellCap
-hi! clear SpellRare
-hi! SpellBad gui=undercurl guisp=red
-hi! SpellCap gui=undercurl guisp=blue
-hi! SpellRare gui=undercurl guisp=magenta
-
-
-" 代码格式化
-Plug 'sbdchd/neoformat'
-
 " 注释
 Plug 'tpope/vim-commentary'
+
+" lsp
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+
+let g:LanguageClient_loadSettings = 1
+let g:LanguageClient_diagnosticsEnable = 1
+let g:LanguageClient_settingsPath = expand('~/.vim/languageclient.json')
+let g:LanguageClient_selectionUI = 'quickfix'
+"let g:LanguageClient_diagnosticsList = v:null
+"let g:LanguageClient_hoverPreview = 'Never'
+let g:LanguageClient_serverCommands = {}
+let g:LanguageClient_serverCommands.c = ['ccls']
+let g:LanguageClient_serverCommands.cpp = ['ccls']
+
+noremap <leader>rd :call LanguageClient#textDocument_definition()<cr>
+noremap <leader>rr :call LanguageClient#textDocument_references()<cr>
+noremap <leader>rv :call LanguageClient#textDocument_hover()<cr>
+
+" Plug 'prabirshrestha/vim-lsp'
+" Plug 'mattn/vim-lsp-settings'
+" let g:lsp_document_highlight_enabled = 0
+
+" nnoremap <leader>rr :LspReferences<cr> 
+" nnoremap <leader>rd :LspDefinition<cr> 
+" nnoremap <leader>rv :LspHover<cr> 
+
